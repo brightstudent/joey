@@ -1,0 +1,299 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --base: white;
+  --gold: gold;
+  --hotpink: hotpink;
+  --aqua: aqua;
+  --rainbow: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+}
+
+@font-face {
+  font-family: comic-sans;
+  src: url("../fonts/COMIC.TTF");
+}
+
+html {
+  font-family: comic-sans, sans-serif;
+  background-image: var(--rainbow);
+}
+
+body {
+  color: var(--base);
+  width: 100%;
+  /* height: 500vh; */
+  background-image: url("../images/moving-bg.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+main {
+  /* border: 3px rgb(53, 53, 53) solid; */
+  margin: 50px auto 0 auto;
+  max-width: 960px;
+  width: 100%;
+  padding: 1em;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  Algemeen                                  */
+/* -------------------------------------------------------------------------- */
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: clamp(20px, 12vw, 60px);
+  background-image: var(--rainbow);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* background-position-x: -5em; */
+  animation: move-rainbow 0.4s linear infinite both alternate;
+  transition: transform .6s;
+  will-change: transform;
+  cursor: pointer;
+}
+
+h1:hover, h1:focus {
+  transform: rotate(366deg);
+}
+
+@keyframes move-rainbow {
+  from {
+    background-position-x: -5em;
+  }
+  to {
+    background-position-x: 10em;
+  }
+}
+
+@media (max-width: 300px) {
+  h1 {
+    font-size: clamp(20px, 12vw, 30px);
+  }
+}
+
+p {
+  font-size: clamp(14px, 8vw, 18px);
+  font-weight: bold;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  Specifics                                 */
+/* -------------------------------------------------------------------------- */
+
+#hero {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  --imgSize: 150px;
+  --imgOffset: 5em;
+}
+
+#hero :is(figure:first-of-type, figure:last-of-type) {
+  position: absolute;
+  height: var(--imgSize);
+  width: var(--imgSize);
+  z-index: 1;
+}
+
+#hero figure:first-of-type {
+  top: -5em;
+  right: var(--imgOffset);
+}
+
+#hero figure:last-of-type {
+  top: -2.5em;
+  left: var(--imgOffset);
+}
+
+@media (max-width: 800px) {
+  #hero {
+    --imgOffset: 0em;
+  }
+  #hero figure:first-of-type {
+    top: -7em;
+  }
+
+  #hero figure:last-of-type {
+    top: -4em;
+  }
+}
+
+@media (max-width: 415px) {
+  #hero {
+    --imgSize: 120px;
+  }
+}
+
+#titel {
+  z-index: 0;
+  border: 0.2em solid var(--base);
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  margin: auto;
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1em;
+}
+
+#titel span {
+  text-transform: uppercase;
+  color: var(--gold);
+  position: relative;
+}
+
+#titel > span::before,
+#titel > span::after {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(-50%);
+  height: 0.2em;
+  width: 30%;
+  text-transform: uppercase;
+  background-color: var(--gold);
+}
+
+#titel > span::before {
+  left: 0;
+}
+#titel > span::after {
+  right: 0;
+}
+
+#titel > h1 {
+  text-transform: capitalize;
+  color: var(--base);
+  text-align: center;
+}
+#titel > p {
+  color: var(--hotpink);
+}
+
+#love {
+  z-index: 0;
+  border: 0.2em solid var(--base);
+  width: 100%;
+  max-width: 600px;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1em;
+}
+
+#middle {
+  /* background-color: red; */
+  text-align: center;
+  max-width: 600px;
+  margin: 5em auto 0 auto;
+  padding: 1em;
+  position: relative;
+}
+
+#middle > p {
+  max-width: 500px;
+  margin: auto;
+  line-height: 1.8;
+  font-weight: bold;
+  color: var(--aqua);
+}
+
+#middle > figure {
+  width: 50px;
+  position: absolute;
+  top: 0;
+  left: -1em;
+}
+
+#end {
+  /* background-color: white; */
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  margin: 5em auto 0 auto;
+  padding: 1em;
+  position: relative;
+}
+
+#end figure:not(figure:last-of-type) {
+  /* border: 2px solid white; */
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  margin: 2em auto;
+}
+
+#end :is(figure:first-of-type img, figure:nth-of-type(2) img) {
+  position: absolute;
+  width: 350px;
+  --imgOffset: 0;
+}
+
+#end > figure:first-of-type img {
+  left: var(--imgOffset);
+}
+#end > figure:nth-of-type(2) img {
+  right: var(--imgOffset);
+}
+
+#end > figure:last-of-type {
+  /* border: 2px solid white; */
+  width: 200px;
+  padding: 2em;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  z-index: 1;
+}
+
+#end > article {
+  display: flex;
+  gap: 2em;
+  flex-direction: column;
+  color: var(--gold);
+  z-index: 1;
+}
+
+#end > article p:first-of-type {
+  display: flex;
+  gap: 2em;
+  flex-direction: column;
+  color: var(--gold);
+  z-index: 1;
+  margin: auto;
+  font-size: clamp(16px, 12vw, 32px);
+  background-image: var(--rainbow);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
